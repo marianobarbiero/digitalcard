@@ -75,7 +75,7 @@
     </header>
 
     <div class="acciones">
-      <a class="boton boton--ancho boton--principal" href="mariano-barbiero.vcf" download="Mariano Barbiero.vcf">
+      <a class="boton boton--ancho boton--principal" id="guardar" href="mariano-barbiero.vcf" download="Mariano Barbiero.vcf">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10m0 0 4-4m-4 4-4-4"/><path d="M4 17v1.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V17"/></svg>
         Save contact
       </a>
@@ -114,6 +114,16 @@
 (function(){
   var datos=["Mariano Barbiero","Jova Software - Software Architect & AI Solutions","Mobile: +54 9 341 307-4757","marianobarbiero@gmail.com","linkedin.com/in/mariano-barbiero","Rosario, Santa Fe, Argentina"].join("\n");
   var aviso;
+  // Android descarga el .vcf en vez de abrirlo: abrimos Contactos con los datos precargados y dejamos el .vcf como respaldo.
+  if(/Android/i.test(navigator.userAgent)){
+    var vcf=new URL("mariano-barbiero.vcf",location.href).href;
+    var e=encodeURIComponent;
+    document.getElementById("guardar").href="intent:#Intent;action=android.intent.action.INSERT;type=vnd.android.cursor.dir/contact;"+
+      "S.name="+e("Mariano Barbiero")+";S.phone="+e("+5493413074757")+";i.phone_type=2;S.email="+e("marianobarbiero@gmail.com")+";"+
+      "S.company="+e("Jova Software")+";S.job_title="+e("Software Architect & AI Solutions")+";"+
+      "S.browser_fallback_url="+e(vcf)+";end";
+    document.getElementById("guardar").removeAttribute("download");
+  }
   function mostrar(t){ if(aviso)aviso.remove(); aviso=document.createElement("div"); aviso.className="aviso"; aviso.setAttribute("role","status"); aviso.textContent=t; document.body.appendChild(aviso); setTimeout(function(){ if(aviso){aviso.remove();aviso=null;} },2600); }
   function respaldo(){ var c=document.createElement("textarea"); c.value=datos; c.style.position="fixed"; c.style.opacity="0"; document.body.appendChild(c); c.select(); var ok=false; try{ok=document.execCommand("copy");}catch(e){} c.remove(); mostrar(ok?"Details copied":"Could not copy details"); }
   document.getElementById("copiar").addEventListener("click",function(){
