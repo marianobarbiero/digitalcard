@@ -69,7 +69,7 @@
         <span class="retrato"><img src="foto.jpg" alt="Mariano Barbiero"></span>
         <div>
           <h1 class="nombre">Mariano<br>Barbiero</h1>
-          <p class="cargo">Desarrollo de software y soluciones web a medida</p>
+          <p class="cargo">Software Architect &amp; AI Solutions</p>
         </div>
       </div>
     </header>
@@ -112,7 +112,7 @@
 </div>
 <script>
 (function(){
-  var datos=["Mariano Barbiero","Jova Software - Desarrollo de software y soluciones web a medida","Cel: +54 9 341 307-4757","marianobarbiero@gmail.com","linkedin.com/in/mariano-barbiero","Rosario, Santa Fe, Argentina"].join("\n");
+  var datos=["Mariano Barbiero","Jova Software - Software Architect & AI Solutions","Cel: +54 9 341 307-4757","marianobarbiero@gmail.com","linkedin.com/in/mariano-barbiero","Rosario, Santa Fe, Argentina"].join("\n");
   var aviso;
   function mostrar(t){ if(aviso)aviso.remove(); aviso=document.createElement("div"); aviso.className="aviso"; aviso.setAttribute("role","status"); aviso.textContent=t; document.body.appendChild(aviso); setTimeout(function(){ if(aviso){aviso.remove();aviso=null;} },2600); }
   function respaldo(){ var c=document.createElement("textarea"); c.value=datos; c.style.position="fixed"; c.style.opacity="0"; document.body.appendChild(c); c.select(); var ok=false; try{ok=document.execCommand("copy");}catch(e){} c.remove(); mostrar(ok?"Datos copiados":"No se pudieron copiar"); }
